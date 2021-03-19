@@ -1,19 +1,18 @@
 <template>
     <Layout>
-        <p>Main content goes here</p>
-        <Games />
+        <Home />
     </Layout>
 </template>
 
 <script>
-import Games from "./pages/Games.vue";
+import Home from "./pages/Home";
 import Layout from "./components/Layout";
 
 export default {
     name: "App",
     components: {
         Layout,
-        Games,
+        Home,
     },
 };
 </script>

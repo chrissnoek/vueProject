@@ -1,35 +1,34 @@
 <template>
     <h1>Games</h1>
-    <GamesCard :games="games" />
+    <div v-if="loadedGames" class="games">
+        <div :key="game.id" v-for="game in loadedGames">
+            <GameCard :game="game" />
+        </div>
+    </div>
 </template>
 
 <script>
-import axios from "axios";
+import GameCard from "../components/Games/GameCard";
 
 export default {
     name: "Games",
-    data() {
-        return {
-            games: [],
-        };
+    components: {
+        GameCard,
     },
-    created() {
-        this.games = [];
-    },
-    methods: {
-        async fetchGames() {
-            const API_KEY = process.env.VUE_APP_RAWG_API_KEY;
-            const result = await axios.get(
-                `https://api.rawg.io/api/games?key=${API_KEY}&dates=2019-09-01,2019-09-30&platforms=18,1,7`
-            );
-            console.log(result);
-            this.games = result.data.results;
+    computed: {
+        loadedGames() {
+            return this.$store.getters.getPopularGames;
         },
     },
-    mounted() {
-        this.fetchGames();
-    },
 };
-
-// https://api.rawg.io/api/games?key=6649714ed20b49d1b25686695eb0974e
 </script>
+
+<style lang="scss" scoped>
+.games {
+    padding: 0rem 5rem;
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 3rem;
+}
+</style>
