@@ -33,11 +33,13 @@ const newGames = `games${key}&date=${lastYear},${currentDate}&ordering=-released
 const popularGamesURL = `${base}${popularGames}`;
 const upcomingGamesURL = `${base}${upcomingGames}`;
 const newGamesURL = `${base}${newGames}`;
+const singleGameURL = (gameId) => `${base}games/${gameId}${key}`;
 
 export {
  popularGamesURL,
  upcomingGamesURL,
- newGamesURL
+ newGamesURL,
+ singleGameURL
 } 
 
 

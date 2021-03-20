@@ -1,5 +1,5 @@
 <template>
-    <div v-if="game.background_image" class="game">
+    <div class="game" @click="loadGame">
         <h3>{{ game.name }}</h3>
         <p>{{ game.released }}</p>
         <img :src="game.background_image" :alt="game.name" />
@@ -11,6 +11,11 @@ export default {
     name: "GameCard",
     props: {
         game: Object,
+    },
+    methods: {
+        loadGame() {
+            this.$store.dispatch("loadDetail", this.game.id);
+        },
     },
 };
 </script>

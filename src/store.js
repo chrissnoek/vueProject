@@ -1,19 +1,23 @@
 import axios from 'axios'
 import { createStore } from 'vuex'
-import {popularGamesURL, upcomingGamesURL, newGamesURL} from "./api"
+import {popularGamesURL, upcomingGamesURL, newGamesURL, singleGameURL} from "./api"
 
 const store = createStore({
   state: {
       popular: [],
       new:[],
-      upcoming: []
+      upcoming: [],
+      currentGame: {}
   },
   mutations: {
     setGames (state, result) {
       console.log(result);
       state.popular = result.popular;
-      state.new = result.upcoming;
-      state.upcoming = result.new;
+      state.new = result.new;
+      state.upcoming = result.upcoming;
+    },
+    setDetail(state, result) {
+      state.currentGame = result;
     }
   }, 
   actions: {
@@ -23,12 +27,30 @@ const store = createStore({
         const {data: {results: newResult}} = await axios.get(newGamesURL);
 
         commit('setGames', {popular:popularResult, upcoming:upcomingResult, new:newResult})
+      },
+      async loadDetail({commit}, id) {
+        const {data: detailResult} = await axios.get(singleGameURL(id));
+        commit('setDetail', detailResult);
       }
   },
   getters: {
     getPopularGames: (state) => {
       console.log('getting popular games')
       return state.popular
+    },
+
+    getUpcomingGames: (state) => {
+      console.log('getting upcoming games')
+      return state.upcoming
+    },
+
+    getNewGames: (state) => {
+      console.log('getting new games')
+      return state.new
+    },
+    getCurrentGame: (state) => {
+      console.log('getting new games')
+      return state.currentGame
     }
   }
 })

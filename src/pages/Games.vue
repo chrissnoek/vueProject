@@ -1,8 +1,26 @@
 <template>
-    <h1>Games</h1>
-    <div v-if="loadedGames" class="games">
-        <div :key="game.id" v-for="game in loadedGames">
-            <GameCard :game="game" />
+    <h2>Upcoming games</h2>
+    <div v-if="loadedUpcomingGames" class="games">
+        <div :key="game.id" v-for="game in loadedUpcomingGames">
+            <div v-if="game.background_image">
+                <GameCard :game="game" />
+            </div>
+        </div>
+    </div>
+    <h2>Popular games</h2>
+    <div v-if="loadedPopularGames" class="games">
+        <div :key="game.id" v-for="game in loadedPopularGames">
+            <div v-if="game.background_image">
+                <GameCard :game="game" />
+            </div>
+        </div>
+    </div>
+    <h2>New games</h2>
+    <div v-if="loadedNewGames" class="games">
+        <div :key="game.id" v-for="game in loadedNewGames">
+            <div v-if="game.background_image">
+                <GameCard :game="game" />
+            </div>
         </div>
     </div>
 </template>
@@ -16,8 +34,20 @@ export default {
         GameCard,
     },
     computed: {
-        loadedGames() {
-            return this.$store.getters.getPopularGames;
+        loadedPopularGames() {
+            return this.$store.getters.getPopularGames.filter((game) => {
+                return game.background_image;
+            });
+        },
+        loadedUpcomingGames() {
+            return this.$store.getters.getUpcomingGames.filter((game) => {
+                return game.background_image;
+            });
+        },
+        loadedNewGames() {
+            return this.$store.getters.getNewGames.filter((game) => {
+                return game.background_image;
+            });
         },
     },
 };
