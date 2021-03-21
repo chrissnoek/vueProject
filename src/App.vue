@@ -1,18 +1,25 @@
 <template>
     <Layout>
-        <Home />
+        <router-view v-slot="{ Component }">
+            <transition
+                enter-active-class="animate__animated animate__fadeIn"
+                leave-active-class="animate__animated animate__fadeOut"
+                :duration="1000"
+                mode="out-in"
+            >
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </Layout>
 </template>
 
 <script>
-import Home from "./pages/Home";
 import Layout from "./components/Layout";
 
 export default {
     name: "App",
     components: {
         Layout,
-        Home,
     },
 };
 </script>
@@ -51,11 +58,12 @@ html {
         font-family: "Abril Fatface", cursive;
         font-weight: lighter;
         color: #333;
+        padding: 5rem 0rem;
     }
     h3 {
         font-size: 1.3rem;
         color: #333;
-        padding: 1.5rem;
+        padding: 1.5rem 0rem;
     }
     p {
         font-size: 1.2rem;
@@ -65,6 +73,9 @@ html {
     a {
         text-decoration: none;
         color: #333;
+    }
+    img {
+        display: block;
     }
 }
 </style>

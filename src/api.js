@@ -35,11 +35,14 @@ const upcomingGamesURL = `${base}${upcomingGames}`;
 const newGamesURL = `${base}${newGames}`;
 const singleGameURL = (gameId) => `${base}games/${gameId}${key}`;
 
+const searchSingleGameURL = (gameName) => `${base}games${key}&search=${gameName}&page_size=9`;
+
 export {
  popularGamesURL,
  upcomingGamesURL,
  newGamesURL,
- singleGameURL
+ singleGameURL,
+ searchSingleGameURL
 } 
 
 

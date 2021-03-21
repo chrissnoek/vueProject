@@ -1,4 +1,14 @@
 <template>
+    <div v-if="loadedSearchedGames.length">
+        <h2>Searched</h2>
+        <div v-if="loadedSearchedGames" class="games">
+            <div :key="game.id" v-for="game in loadedSearchedGames">
+                <div v-if="game.background_image">
+                    <GameCard :game="game" />
+                </div>
+            </div>
+        </div>
+    </div>
     <h2>Upcoming games</h2>
     <div v-if="loadedUpcomingGames" class="games">
         <div :key="game.id" v-for="game in loadedUpcomingGames">
@@ -48,6 +58,13 @@ export default {
             return this.$store.getters.getNewGames.filter((game) => {
                 return game.background_image;
             });
+        },
+        loadedSearchedGames() {
+            return this.$store.getters.getSearched.length > 0
+                ? this.$store.getters.getSearched.filter((game) => {
+                      return game.background_image;
+                  })
+                : [];
         },
     },
 };
