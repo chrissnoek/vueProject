@@ -1,42 +1,48 @@
 <template>
     <div v-if="!loadingDetail" class="cardShadow" @click="exitDetail">
-        <div class="detail">
-            <div class="stats">
-                <div class="rating">
-                    <h3>{{ loadedGame.name }}</h3>
-                    <p>Rating: {{ loadedGame.rating }}</p>
-                    <div class="ratingStars">
-                        <img
-                            v-for="star in getStars"
-                            :key="star.id"
-                            :src="star"
-                            alt="star"
-                        />
-                    </div>
-                </div>
-                <div class="info">
-                    <h3>Platforms</h3>
-
-                    <div class="platforms">
-                        <div :key="platform.id" v-for="platform in platforms">
+        <div class="padding">
+            <div class="detail">
+                <div class="stats">
+                    <div class="rating">
+                        <h3>{{ loadedGame.name }}</h3>
+                        <p>Rating: {{ loadedGame.rating }}</p>
+                        <div class="ratingStars">
                             <img
-                                :src="showIcon(platform)"
-                                :alt="platform"
-                                :title="platform"
+                                v-for="star in getStars"
+                                :key="star.id"
+                                :src="star"
+                                alt="star"
                             />
                         </div>
                     </div>
+                    <div class="info">
+                        <h3>Platforms</h3>
+
+                        <div class="platforms">
+                            <div
+                                :key="platform.id"
+                                v-for="platform in platforms"
+                            >
+                                <img
+                                    :src="showIcon(platform)"
+                                    :alt="platform"
+                                    :title="platform"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="media">
+                    <img :src="image" :alt="loadedGame.name" />
+                </div>
+                <div class="description">
+                    <p>{{ loadedGame.description_raw }}</p>
+                </div>
+                <div class="gallery">
+                    <h2>screenshots</h2>
                 </div>
             </div>
-            <div class="media">
-                <img :src="image" :alt="loadedGame.name" />
-            </div>
-            <div class="description">
-                <p>{{ loadedGame.description_raw }}</p>
-            </div>
-            <div class="gallery">
-                <h2>screenshots</h2>
-            </div>
+            <div class="space"></div>
         </div>
     </div>
 </template>
@@ -123,6 +129,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.space {
+    display: table;
+    clear: both;
+    height: 50px;
+    width: 100%;
+}
 .cardShadow {
     width: 100%;
     min-height: 100vh;
@@ -142,36 +154,46 @@ export default {
         background-color: white;
     }
 
-    .stats {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .info {
-            text-align: center;
-
-            .platforms {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-
-                img {
-                    max-width: 2rem;
-                    margin-left: 3rem;
-                }
-            }
-        }
-    }
-
     .detail {
-        width: 80%;
+        width: 90%;
+        left: 5%;
         border-radius: 1rem;
         padding: 2rem 5rem;
         background: white;
         position: absolute;
-        left: 10%;
         color: black;
+        margin: 2rem 0;
 
+        @media screen and (min-width: 960px) {
+            width: 75%;
+            left: 12.5%;
+        }
+
+        @media screen and (min-width: 1280px) {
+            width: 50%;
+            left: 25%;
+        }
+
+        .stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .info {
+                text-align: center;
+
+                .platforms {
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+                    img {
+                        max-width: 2rem;
+                        margin-left: 3rem;
+                    }
+                }
+            }
+        }
         .ratingStars {
             display: flex;
         }

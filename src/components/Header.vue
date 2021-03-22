@@ -50,16 +50,22 @@ header {
         width: 100%;
 
         input {
-            width: 30%;
+            width: 50%;
             font-size: 1.5rem;
             padding: 1rem;
             outline: none;
-            border: none;
+            border: 3px solid #fd6d6d;
             margin-top: 1rem;
-            box-shadow: 0px 0px 30px rgba($color: #000000, $alpha: 0.5);
             font-weight: bold;
             font-family: "Monserrat", sans-serif;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+
+            @media screen and (min-width: 1280px) {
+                width: 30%;
+            }
         }
+
         input[type="submit"] {
             font-size: 1.5rem;
             border: none;
@@ -67,7 +73,16 @@ header {
             cursor: pointer;
             background: #ff7676;
             color: white;
-            border-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border: 3px solid #ff7676;
+
+            &:hover {
+                border: 3px solid #fd6d6d;
+                background: #fd6d6d;
+            }
         }
     }
     .logo {
