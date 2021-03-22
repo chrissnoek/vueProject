@@ -2,9 +2,9 @@
     <div v-if="!loadingDetail" class="cardShadow" @click="exitDetail">
         <div class="padding">
             <div class="detail">
+                <h3>{{ loadedGame.name }}</h3>
                 <div class="stats">
                     <div class="rating">
-                        <h3>{{ loadedGame.name }}</h3>
                         <p>Rating: {{ loadedGame.rating }}</p>
                         <div class="ratingStars">
                             <img
@@ -174,6 +174,10 @@ export default {
             left: 25%;
         }
 
+        > h3 {
+            font-size: 3rem;
+        }
+
         .stats {
             display: flex;
             align-items: center;
@@ -207,7 +211,7 @@ export default {
 
             img {
                 width: 100%;
-                height: 30vh;
+                height: 45vh;
                 object-fit: cover;
             }
         }
